@@ -1,11 +1,8 @@
   // JavaScript Document
   $(document).ready(function(){
     $(window).scrollTop(0);
-    //Wow Animation
     new WOW().init();
-    //Hide New Action
     $("#hideBtn").click(function() {
-        // Hide the targeted div
         $("#new-section").hide(1000);
         $("#showBtn").show(1000);
         
@@ -25,8 +22,9 @@ const selectHours = document.getElementsByClassName('hr');
 const selectMinutes = document.getElementsByClassName('min');
 const selectStatusFirst = document.getElementById('status');
 const close = document.getElementById('close');
-const cancel = document.getElementById('cancel')
-const items = [
+const cancel = document.getElementById('cancel');
+const listLength = document.querySelectorAll('.listLength');
+let items = [
     {
         title:"Lorem Ipsum",
         forPOC:"HON CIRCLE;",
@@ -58,13 +56,20 @@ const items = [
         startDate:"1/29/2010 6:30:00 PM",
         targetDate:"1/29/2010 6:30:00 PM",
         actualDate:"1/29/2010 6:30:00 PM"
-    }
+    },
 ];
+//Maintain local storage for items list
+if(!localStorage.getItem('items')){
+    localStorage.setItem('items', JSON.stringify(items));
+    console.log(items);
+} else{
+    items = JSON.parse(localStorage.getItem('items'));
+    console.log("else", items);
+}
 function removeElement(id){
     items.splice(id,1)
-    createItemList();
+    createItemList(); 
 }
-
 function createItemList(){
         listHTML = items.map((item, index) => `
         <div class="col-md-6 mb-4 wow fadeIn">
@@ -92,6 +97,10 @@ function createItemList(){
                     </div>
         `).join('');
         listContainer.innerHTML = listHTML;
+        listLength.forEach((element) => {
+            element.textContent = `${items.length}`;
+        });
+        localStorage.setItem('items', JSON.stringify(items));
 }
 createItemList();
 submitListForm.addEventListener('submit', (e)=>{
@@ -111,14 +120,13 @@ submitListForm.addEventListener('submit', (e)=>{
             targetDate:"",
             actualDate:""
         
-    })
-    loader.style.display = 'flex';
-    window.location.href = './success.html'; 
+        })
+    loader.style.display = 'none';
+    createItemList();
+  window.location.href = './success.html'; 
      },2000)
-    
-    
-    console.log(items)
 })
+
 function populateHours() {
     for (let i = 1; i <= 24; i++) {
         const option = document.createElement('option');
@@ -160,27 +168,16 @@ $(function () {
     });
   });
   
-//   function cancel(){
-//         cancel.addEventListener('click', function(){
-//         submitListForm.reset()
-//         })
-//     }
-  
-
+//Form reset
+cancel.addEventListener('click', function(){
+    submitListForm.reset()
+})
 
   function convertToAMPM(time24) {
-    // Split the time into hours and minutes
     const [hours, minutes] = time24.split(':').map(Number);
-
-    // Determine if it's AM or PM
     const period = hours >= 12 ? 'PM' : 'AM';
-
-    // Convert hours to 12-hour format
     const hours12 = (hours % 12) || 12;
-
-    // Format the time in AM/PM format
     const time12 = `${hours12.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')} ${period}`;
-
     return time12 + ":00";
 }
 //on click of close select by default option 

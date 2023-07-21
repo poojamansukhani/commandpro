@@ -44,6 +44,7 @@ body{background: #59a011; font-size: 12px;}
 #showBtn img{-webkit-transform: rotate(180deg);transform: rotate(180deg);}
 .linkPagination .page-item{padding: 0 2px;}
 .linkPagination .page-item .page-link{background: transparent;border: none;color: #555555;padding: 2px 7px;}
-    .linkPagination .page-item.active .page-link, .linkPagination .page-item .page-link:hover{background: #59a011;color: #fff;}
+.linkPagination .page-item.active .page-link, .linkPagination .page-item .page-link:hover{background: #59a011;color: #fff;}
 .datepicker input{width: 84%;}
 .linkPagination .page-item .page-link:focus{outline: none;box-shadow: none;}
+.datepicker td.day:hover, .datepicker .prev:hover, .datepicker .next:hover {opacity: 0.5;cursor: pointer;}
