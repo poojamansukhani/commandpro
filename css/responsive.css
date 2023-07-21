@@ -1,0 +1,43 @@
+@charset "utf-8";
+@media (max-width:1199px){
+    .input-group-append.white-bg .input-group-text{padding: 0 0 0 5px;}
+}
+@media (max-width:991px){
+    .header-label {
+        font-size: 18px;
+    }
+    .statusCol{margin-bottom: 1rem;}
+    .datepicker input {
+        width: 92%;
+    }
+}
+@media (max-width: 767px){
+    .header .navbar-brand {
+        padding: 5px 0;
+    }
+    .header {
+        padding: 7px 15px;
+    }
+    .header-label {
+        font-size: 16px;
+    }
+    .paginationNav, .listing-heading{width: 100%;}
+    .section{padding: 30px 15px;}
+    .listing-heading {
+        font-size: 18px;
+    }
+}
+@media (max-width:575px){
+    .header{text-align: center;}
+    .header .header-label{text-align: center !important;}
+}
+@media (max-width: 576px){
+    .container {
+        max-width: 99%;
+    }
+}
+@media (max-width: 390px){
+    .datepicker input {
+        width: 88%;
+    }
+}
